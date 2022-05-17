@@ -1,3 +1,6 @@
+![image](https://user-images.githubusercontent.com/66936716/168831391-b6104bbf-ddae-4c21-8e26-6819e6ec84da.png)
+
+
 <div dir="rtl" lang="he">
 
 # טבלה ארגונית עם איטרטורים
@@ -63,3 +66,5 @@
 * יש לדווח על כל עזרה שקיבלתם, מסטודנטים אחרים או מהאינטרנט, בהתאם ל[תקנון היושר של המחלקה](https://www.ariel.ac.il/wp/cs/wp-content/uploads/sites/88/2020/08/Guidelines-for-Academic-Integrity.pdf).
 
 </div>
+
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fyakov103%2FEx5-cpp-OrgChartA&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
