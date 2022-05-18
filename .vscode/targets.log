@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue May 17 07:09:15 2022
+# Make data base, printed on Wed May 18 07:52:01 2022
 
 # Variables
 
@@ -43,7 +43,7 @@ GDMSESSION = ubuntu
 # environment
 XMODIFIERS = @im=ibus
 # makefile
-CURDIR := /home/yakovkhodorkovski/Desktop/iter_ex5_thefinafinalfinal2022/Ex5-cpp-OrgChartA
+CURDIR := /home/yakovkhodorkovski/Desktop/test_before_submit/Ex5-cpp-OrgChartA
 # makefile
 SHELL = /bin/sh
 # environment
@@ -83,7 +83,7 @@ MANAGERPID = 1557
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
-VSCODE_CWD = /home/yakovkhodorkovski/Desktop/iter_ex5_thefinafinalfinal2022/Ex5-cpp-OrgChartA
+VSCODE_CWD = /home/yakovkhodorkovski/Desktop/test_before_submit/Ex5-cpp-OrgChartA
 # environment
 GSETTINGS_SCHEMA_DIR = /snap/code/96/usr/share/glib-2.0/schemas
 # default
@@ -133,7 +133,7 @@ SNAP_INSTANCE_KEY =
 # makefile (from 'Makefile', line 4)
 CXXVERSION = c++2a
 # environment
-PWD = /home/yakovkhodorkovski/Desktop/iter_ex5_thefinafinalfinal2022/Ex5-cpp-OrgChartA
+PWD = /home/yakovkhodorkovski/Desktop/test_before_submit/Ex5-cpp-OrgChartA
 # default
 .LOADED := 
 # environment
@@ -155,7 +155,7 @@ VSCODE_CODE_CACHE_PATH = /home/yakovkhodorkovski/.config/Code/CachedData/da15b6f
 # environment
 LOGNAME = yakovkhodorkovski
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
 # environment
@@ -193,7 +193,7 @@ SHLVL = 1
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-3083107d-059f-40db-b783-4b07d24c2940.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-58b02788-28d0-46d4-99a8-2e691dd55765.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -245,11 +245,11 @@ DBUS_STARTER_BUS_TYPE = session
 # makefile (from 'Makefile', line 5)
 SOURCE_PATH = sources
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/ec07b744_219f_4757_badf_1b7c71d23516
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/a73f9dfe_fd22_4865_a0dc_b5f462ecf685
 # automatic
 ^F = $(notdir $^)
 # environment
-GNOME_TERMINAL_SERVICE = :1.598
+GNOME_TERMINAL_SERVICE = :1.4281
 # default
 SUFFIXES := 
 # environment
@@ -269,7 +269,7 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 30449
+VSCODE_PID = 38173
 # environment
 DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=f217a3aace85d29c6bcd726962835f99
 # makefile (from 'Makefile', line 8)
@@ -284,8 +284,8 @@ TIDY_FLAGS = -extra-arg=-std=$(CXXVERSION) -checks=bugprone-*,clang-analyzer-*,c
 
 # Directories
 
-# . (device 2053, inode 951798): 14 files, no impossibilities.
-# sources (device 2053, inode 951810): 5 files, no impossibilities.
+# . (device 2053, inode 958576): 14 files, no impossibilities.
+# sources (device 2053, inode 958622): 5 files, no impossibilities.
 
 # 19 files, no impossibilities in 2 directories.
 
@@ -320,7 +320,7 @@ demo: Demo.o objects/OrgChart.o
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-17 01:42:17.99926
+#  Last modified 2022-05-18 07:50:44.976350593
 #  File has been updated.
 #  Successfully updated.
 
@@ -405,6 +405,6 @@ valgrind: demo test
 # strcache performance: lookups = 55 / hit rate = 34%
 # hash-table stats:
 # Load=36/8192=0%, Rehash=0, Collisions=2/55=4%
-# Finished Make data base on Tue May 17 07:09:15 2022
+# Finished Make data base on Wed May 18 07:52:01 2022
 
  
