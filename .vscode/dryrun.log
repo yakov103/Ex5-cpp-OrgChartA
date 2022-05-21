@@ -1,8 +1,7 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/yakovkhodorkovski/Desktop/test_before_submit/Ex5-cpp-OrgChartA'
-clang++-9  -std=c++2a -Werror -Wsign-conversion -Isources --compile Demo.cpp -o Demo.o
-clang++-9  -std=c++2a -Werror -Wsign-conversion -Isources --compile sources/OrgChart.cpp -o objects/OrgChart.o
-clang++-9  -std=c++2a -Werror -Wsign-conversion -Isources Demo.o objects/OrgChart.o -o demo
+make --dry-run --keep-going --print-directory
+make: Entering directory '/home/yakovkhodorkovski/Desktop/newverEx5-forpart2/Ex5-cpp-OrgChartA'
+ 
 ./demo
-make: Leaving directory '/home/yakovkhodorkovski/Desktop/test_before_submit/Ex5-cpp-OrgChartA'
+ 
+make: Leaving directory '/home/yakovkhodorkovski/Desktop/newverEx5-forpart2/Ex5-cpp-OrgChartA'
  
