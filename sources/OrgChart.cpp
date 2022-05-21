@@ -87,6 +87,9 @@ namespace ariel {
 
 
     OrgChart::Iterator OrgChart::begin_level_order()  {
+        if (!_orderedVec.empty()){
+            delete _orderedVec.back(); 
+        }
         _orderedVec.clear();
         this->_orderedVec.push_back(_root);
         this->fill_order(_root,LEVEL_ORDER);
@@ -104,6 +107,9 @@ namespace ariel {
   */
 
     OrgChart::Iterator OrgChart::begin_reverse_order()  {
+        if (!_orderedVec.empty()){
+            delete _orderedVec.back(); 
+        }
         this->_orderedVec.clear();
         Node *temp = new Node;
         temp->name= "ENDITERATOR";
@@ -114,6 +120,9 @@ namespace ariel {
         return it;
     }
    OrgChart::Iterator OrgChart::begin_preorder()  {
+        if (!_orderedVec.empty()){
+            delete _orderedVec.back(); 
+        }
         _orderedVec.clear();
         this->_orderedVec.push_back(_root);
         this->fill_order(_root,PRE_ORDER);
