@@ -64,10 +64,10 @@ namespace ariel {
         OrgChart::Iterator end();
         OrgChart::Iterator begin_level_order() ;
         OrgChart::Iterator begin_reverse_order() ;
-//        OrgChart::Iterator begin_preorder() const;
+        OrgChart::Iterator begin_preorder() ;
         OrgChart::Iterator end_level_order() ;
         OrgChart::Iterator reverse_order()  ;
-//        OrgChart::Iterator end_preorder() const;
+       OrgChart::Iterator end_preorder() ;
 
 
 

@@ -50,12 +50,12 @@ printf("here2\n");
     {
         cout << (*it) << " " ;
     }
-
+  printf("here4\n");
     // prints: VP_SW VP_BI CTO CFO COO CEO
-//    for (auto it=organization.begin_preorder(); it!=organization.end_preorder(); ++it) {
-//        cout << (*it) << " " ;
-//    }  // prints: CEO CTO VP_SW CFO COO VP_BI
-//
+   for (auto it=organization.begin_preorder(); it!=organization.end_preorder(); ++it) {
+       cout << (*it) << " " ;
+   }  // prints: CEO CTO VP_SW CFO COO VP_BI
+
 //    for (auto element : organization)
 //    { // this should work like level order
 //        cout << element << " " ;

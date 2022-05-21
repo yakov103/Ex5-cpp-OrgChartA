@@ -105,19 +105,26 @@ namespace ariel {
         Iterator it = Iterator(&this->_orderedVec, REVERSE_ORDER);
         return it;
     }
-//    OrgChart::Iterator OrgChart::begin_preorder() const {
-//        return Iterator(PRE_ORDER, _root);
-//    }
+   OrgChart::Iterator OrgChart::begin_preorder()  {
+        _orderedVec.clear();
+        this->_orderedVec.push_back(_root);
+        this->fill_order(_root,PRE_ORDER);
+        Node *temp = new Node;
+        temp->name= "ENDITERATOR";
+        this->_orderedVec.push_back(temp);
+        Iterator it = Iterator(&this->_orderedVec, PRE_ORDER);
+        return it;
+   }
     OrgChart::Iterator OrgChart::end_level_order() {
         return Iterator(&_orderedVec, END_LEVEL_ORDER);
     }
     OrgChart::Iterator OrgChart::reverse_order() {
         return Iterator(&_orderedVec, END_LEVEL_ORDER);
     }
-//    OrgChart::Iterator OrgChart::end_preorder() const {
-//        return Iterator(PRE_ORDER, nullptr);
-//    }
-//
+   OrgChart::Iterator OrgChart::end_preorder(){
+          return Iterator(&_orderedVec, END_LEVEL_ORDER);
+   }
+
     OrgChart::Iterator OrgChart::begin(){
         return begin_level_order();
     }
@@ -163,6 +170,14 @@ namespace ariel {
                 // }
                 // cout << endl;
 
+            }
+            else if (type == PRE_ORDER){
+                for (i = 0 ; i < node->children.size() ; i++){
+                    _orderedVec.push_back(node->children.at(i));
+                    if (node->children.at(i)->children.size() > 0){
+                        fill_order(node->children.at(i), type);
+                    }
+                }
             }
         }
 
