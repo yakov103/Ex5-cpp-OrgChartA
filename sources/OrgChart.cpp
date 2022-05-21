@@ -17,8 +17,14 @@ namespace ariel {
     */
 
     OrgChart::~OrgChart() {
-        delete _root;
-    }
+       
+       while (!_orderedVec.empty()) {
+            delete _orderedVec.back();
+            _orderedVec.pop_back();
+        }
+        
+}
+
 
 
     OrgChart& OrgChart::operator= (const OrgChart& other) {
@@ -40,6 +46,7 @@ namespace ariel {
         }
         _root = new Node;
         _root->name = name;
+        _root->level = 0 ; 
         return *this;
     }
 
@@ -49,6 +56,7 @@ namespace ariel {
         {
             Node *new_sub = new Node;
             new_sub->name = child;
+            new_sub->level = node->level +1 ; 
             node->children.push_back(new_sub);
             return true;
         }
@@ -132,12 +140,22 @@ namespace ariel {
         return end_level_order();
     }
 
-    ostream& operator<<(ostream& os, const OrgChart& org) {
-//        int i = 0 ;
-//        for (auto it = org.begin(); it != org.end() && i < 7 ; ++it) {
-//            os << *it << " ";
-//            i++;
-//        }
+    ostream& operator<<(ostream& os,  OrgChart& org) {
+        org.begin();
+        unsigned int  i ;
+        unsigned int currLevel = 0 ; 
+        unsigned int total = org._orderedVec.size();
+
+        for (i = 0 ; i < org._orderedVec.size()-1; i++){ 
+            if (currLevel  == org._orderedVec.at(i)->level){
+                os << org._orderedVec.at(i)->name << " "; 
+            }
+            else {
+                os << "\n"; 
+                currLevel++; 
+                os << org._orderedVec.at(i)->name << " "; 
+            }
+        }
        return os;
     }
 

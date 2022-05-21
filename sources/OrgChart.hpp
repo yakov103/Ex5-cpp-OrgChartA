@@ -22,6 +22,7 @@ namespace ariel {
     struct Node {
         string name;
         vector<Node*> children;
+        unsigned int level; 
     };
 
     class OrgChart {
@@ -72,7 +73,7 @@ namespace ariel {
 
 
 
-        friend ostream& operator<<(ostream& os, const OrgChart& org);
+        friend ostream& operator<<(ostream& os,OrgChart& org);
 
 
 
