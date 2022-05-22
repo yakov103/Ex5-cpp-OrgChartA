@@ -1,118 +1,152 @@
 #include "doctest.h"
-#include <string>
-#include <stdexcept>
-#include <iostream>
-#include <vector>
 #include "OrgChart.hpp"
-using namespace std;
 using namespace ariel;
 
-TEST_CASE("Good case ")
-{
- 
-     OrgChart org;
-  
-        CHECK_NOTHROW(org.add_root("root"));
-        CHECK_NOTHROW(org.add_sub("root", "child1"));
-        CHECK_NOTHROW(org.add_sub("child1", "grandchild1"));
-        CHECK_NOTHROW(org.add_sub("grandchild1", "greatgrandchild1"));
-        CHECK_NOTHROW(org.add_sub("root", "child2"));
-        CHECK_NOTHROW(org.add_sub("child2", "grandchild2"));
-        CHECK_NOTHROW(org.add_sub("grandchild2", "greatgrandchild2"));
-        CHECK_NOTHROW(org.add_sub("root", "child3"));
-        CHECK_NOTHROW(org.add_sub("child3", "grandchild3"));
-        CHECK_NOTHROW(org.add_sub("grandchild3", "greatgrandchild3"));
-        CHECK_NOTHROW(org.add_sub("root", "child4"));
-        CHECK_NOTHROW(org.add_sub("child4", "grandchild4"));
-        CHECK_NOTHROW(org.add_sub("grandchild4", "greatgrandchild4"));
-        string token; 
-        string forchild;  
+/*Renana Rimon*/
 
+TEST_CASE("BUILD_ORG"){
+printf("here\n"); 
+    OrgChart org;
+    OrgChart org_empty;
+    OrgChart org_double_names;
+    /* create normal tree */
+    CHECK_THROWS_MESSAGE(org.add_sub("tal", "renana"), "can't add sub before root");
+    CHECK_NOTHROW(org.add_root("adi"));
+    CHECK_NOTHROW(org.add_root("shir"));
+    CHECK_NOTHROW(org.add_sub("shir", "tal"));
+    CHECK_THROWS_MESSAGE(org.add_sub("adi", "sapir"), "employer doesn't exist");
+    CHECK_NOTHROW(org.add_sub("shir", "sapir"));
+    CHECK_NOTHROW(org.add_sub("sapir", "dan"));
+    CHECK_NOTHROW(org.add_sub("dan", "ziv"));
+    CHECK_NOTHROW(org.add_sub("tal", "avi"));
+    CHECK_NOTHROW(org.add_sub("tal", "yossi"));
+    CHECK_NOTHROW(org.add_sub("shir", "ido"));
+    CHECK_NOTHROW(org.add_sub("ziv", "shaked"));
+    CHECK_NOTHROW(org.add_sub("ziv", "ofer"));
 
-        OrgChart organization;
-        CHECK_NOTHROW(organization.add_root("CEO")); // add root
-        CHECK_NOTHROW(organization.add_sub("CEO", "CTO"));          // Now the CTO is subordinate to the CEO
-        CHECK_NOTHROW(organization.add_sub("CEO", "CFO"));         // Now the CFO is subordinate to the CEO
-        CHECK_NOTHROW(organization.add_sub("CEO", "COO"));        // Now the COO is subordinate to the CEO
-        CHECK_NOTHROW(organization.add_sub("CTO", "VP_SW")); // Now the VP Software is subordinate to the CTO
-        CHECK_NOTHROW(organization.add_sub("COO", "VP_BI"));      // Now the VP_BI is subordinate to the COO
-
-        cout << organization << endl; /* Prints the org chart in a reasonable format. For example:
-       CEO
-       |--------|--------|
-       CTO      CFO      COO
-       |                 |
-       VP_SW             VP_BI
- */
-    token.clear(); 
-  for (auto it = organization.begin_level_order(); it != organization.end_level_order(); ++it){token += *it + " " ;}
-  
-  CHECK (token == "CEO CTO CFO COO VP_SW VP_BI " );
-  token.clear();
-  for (auto it = organization.begin_reverse_order(); it != organization.reverse_order(); ++it){token += *it + " " ;}
-    CHECK (token == "VP_SW VP_BI CTO CFO COO CEO " );
-    token.clear();
-  for (auto it=organization.begin_preorder(); it!=organization.end_preorder(); ++it) {token += *it + " " ;}
-    CHECK (token == "CEO CTO VP_SW CFO COO VP_BI " );
-    token.clear();
-
-  // demonstrate the arrow operator:
-  for (auto it = organization.begin_level_order(); it != organization.end_level_order(); ++it)
-  {
-    cout << it->size() << " " ;
-  } 
-        
-
-        //  level order 
-        // int i = 0 ; 
-        // for (auto it = org.begin_level_order(); it != org.end_level_order(); it++) {
-        //     if (i == 0 ){
-        //         CHECK (*it == "root");
-        //         i++;
-        //         continue;
-        //     }
-        //     if (i <= 4){
-        //     token = *it;
-        //     forchild = "child"; 
-        //     forchild += to_string(i);
-        //     CHECK(token == forchild);
-        //     printf("%s\n", token.c_str());
-        //     i++;
-        //     continue;
-        //     }
-        //     if (5 <= i && i < 8){
-        //     token = *it;
-        //     forchild = "grandchild"; 
-        //     forchild += to_string(i%4);
-        //     printf("%s\n", token.c_str());
-        //     CHECK(token == forchild);
-        //     i++; 
-        //     continue;
-        //     }
-        //     if (9 <= i && i < 12){
-        //     token = *it;
-        //     forchild = "greatgrandchild";
-        //     forchild += to_string(i%4+1);
-        //     CHECK(token == forchild);
-        //     i++; 
-        //     continue;
-        //     }
-        
-
-        
+    /* create tree with 1 name*/
+    CHECK_NOTHROW(org_double_names.add_root("adi"));
+    for (size_t i = 0; i < 20; i++)
+    {
+        CHECK_NOTHROW(org_double_names.add_sub("adi", "adi"));
     }
-     
-    // check revese order
 
-TEST_CASE("Bad cases"){
+    /**************************************************************/
+    SUBCASE("level_order"){
+        /*check level order with normal tree*/
+        std::vector<std::string> v = {"shir", "tal", "sapir", "ido", "avi", "yossi", "dan", "ziv", "shaked", "ofer"};
+        size_t i = 0;
+        for(auto it = org.begin_level_order(); it != org.end_level_order(); ++it){
+            CHECK(*it == v[i++]);
+        }
 
-    OrgChart org; 
-    CHECK_THROWS(org.add_sub("root", "child")); // still no root 
-    CHECK_NOTHROW(org.add_root("root"));
-    CHECK_NOTHROW(org.add_sub("root", "child"));
-    CHECK_NOTHROW(org.add_sub("child", "grandchild"));
-    CHECK_NOTHROW(org.add_sub("grandchild", "greatgrandchild"));
-    CHECK_THROWS(org.add_sub("whatt", "cannot"));// no such parent
-    CHECK_THROWS(org.add_sub("bishbash", "child")); // no such parent
+        /*check level order with empty tree*/
+        CHECK_THROWS_MESSAGE(org_empty.begin_level_order(), "chart is empty!");
+        CHECK_THROWS_MESSAGE(org_empty.end_level_order(), "chart is empty!");
+
+        /*check level order with 1 name tree*/
+        for(auto it = org_double_names.begin_level_order(); it != org_double_names.end_level_order(); ++it){
+            CHECK(*it == "adi");
+        }
+
+        /* check iter size*/
+        std::vector<size_t> nums = {4, 3, 5, 3, 3, 5, 3, 3, 6, 4};
+        i = 0;
+        for(auto it = org.begin_level_order(); it != org.end_level_order(); ++it){
+            CHECK(*it == v[i++]);
+        }
+
+    }
+
+    SUBCASE("reverse_level_order"){
+        cout << "----------------------------" << endl;
+        cout << org << endl; 
+        cout << "----------------------------" << endl;
+        /*check reverse level order with normal tree*/
+        std::vector<std::string> v = {"shaked", "ofer", "ziv", "avi", "yossi", "dan", "tal", "sapir", "ido", "shir"};
+        size_t i = 0;
+        for(auto it = org.begin_reverse_order(); it != org.reverse_order(); ++it){
+            cout << *it << "  ";
+        }
+        cout << endl;
+
+        for(auto it = org.begin_reverse_order(); it != org.reverse_order(); ++it){
+            cout << *it << "  ";
+            CHECK(*it == v[i++]);
+        }
+        cout << endl;
+
+        /*check reverse level order with empty tree*/
+        CHECK_THROWS_MESSAGE(org_empty.begin_reverse_order(), "chart is empty!");
+        CHECK_THROWS_MESSAGE(org_empty.reverse_order(), "chart is empty!");
+
+        /*check reverse level order with 1 name tree*/
+        for(auto it = org_double_names.begin_reverse_order(); it != org_double_names.reverse_order(); ++it){
+            CHECK(*it == "adi");
+        }
+
+        /* check iter size*/
+        std::vector<size_t> nums = {6, 4, 3, 3, 5, 3, 3, 5, 3, 4};
+        i = 0;
+        for(auto it = org.begin_reverse_order(); it != org.reverse_order(); ++it){
+            CHECK(*it == v[i++]);
+        }
+
+    }
+
+    SUBCASE("PreOrder"){
+        /*check PreOrder with normal tree*/
+        std::vector<std::string> v = {"shir", "tal", "avi", "yossi", "sapir", "dan", "ziv", "shaked", "ofer", "ido"};
+        size_t i = 0;
+        for(auto it = org.begin_preorder(); it != org.end_preorder(); ++it){
+            CHECK(*it == v[i++]);
+        }
+
+        /*check PreOrder with empty tree*/
+        CHECK_THROWS_MESSAGE(org_empty.begin_preorder(), "chart is empty!");
+        CHECK_THROWS_MESSAGE(org_empty.end_preorder(), "chart is empty!");
+
+        /*check PreOrder with 1 name tree*/
+        for(auto it = org_double_names.begin_preorder(); it != org_double_names.end_preorder(); ++it){
+            CHECK(*it == "adi");
+        }
+        /* check iter size*/
+        std::vector<size_t> nums = {4, 3, 3, 5, 5, 3, 3, 6, 4, 3};
+        i = 0;
+        for(auto it = org.begin_preorder(); it != org.end_preorder(); ++it){
+            CHECK(it->size() == nums[i++]);
+        }
+    }
+
+    SUBCASE("special"){
+        OrgChart org_special;
+        CHECK_NOTHROW(org_special.add_root("boss"));
+        CHECK_NOTHROW(org_special.add_root("boss1"));
+        CHECK_NOTHROW(org_special.add_root("boss2"));
+        CHECK_NOTHROW(org_special.add_root("boss3"));
+        CHECK_NOTHROW(org_special.add_root("boss4"));
+        CHECK_NOTHROW(org_special.add_root("boss5"));
+        CHECK_NOTHROW(org_special.add_root("boss6"));
+
+        /*check that org size is 1, and root is the last*/
+        int i =0; 
+        for(auto it = org_special.begin_preorder(); it != org_special.end_preorder(); ++it){
+            CHECK(*it == "boss6");
+            CHECK(i==0);
+            i++;
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 }

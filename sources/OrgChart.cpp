@@ -18,10 +18,10 @@ namespace ariel {
 
     OrgChart::~OrgChart() {
        
-       while (!_orderedVec.empty()) {
-            delete _orderedVec.back();
-            _orderedVec.pop_back();
-        }
+    //    while (!_orderedVec.empty()) {
+    //         delete _orderedVec.back();
+    //         _orderedVec.pop_back();
+    //     }
         
 }
 
@@ -87,6 +87,9 @@ namespace ariel {
 
 
     OrgChart::Iterator OrgChart::begin_level_order()  {
+        if (_root == nullptr) {
+            throw "no root";
+        }
         if (!_orderedVec.empty()){
             delete _orderedVec.back(); 
         }
@@ -107,6 +110,9 @@ namespace ariel {
   */
 
     OrgChart::Iterator OrgChart::begin_reverse_order()  {
+              if (_root == nullptr) {
+            throw "no root";
+        }
         if (!_orderedVec.empty()){
             delete _orderedVec.back(); 
         }
@@ -114,12 +120,15 @@ namespace ariel {
         Node *temp = new Node;
         temp->name= "ENDITERATOR";
         this->_orderedVec.insert(_orderedVec.begin(),temp);
-        this->_orderedVec.insert(_orderedVec.begin(),_root);
+        //this->_orderedVec.insert(_orderedVec.begin(),_root);
         this->fill_order(_root,REVERSE_ORDER);
         Iterator it = Iterator(&this->_orderedVec, REVERSE_ORDER);
         return it;
     }
    OrgChart::Iterator OrgChart::begin_preorder()  {
+        if (_root == nullptr) {
+            throw "no root";
+        }
         if (!_orderedVec.empty()){
             delete _orderedVec.back(); 
         }
@@ -133,12 +142,21 @@ namespace ariel {
         return it;
    }
     OrgChart::Iterator OrgChart::end_level_order() {
+              if (_root == nullptr) {
+            throw "no root";
+        }
         return Iterator(&_orderedVec, END_LEVEL_ORDER);
     }
     OrgChart::Iterator OrgChart::reverse_order() {
+              if (_root == nullptr) {
+            throw "no root";
+        }
         return Iterator(&_orderedVec, END_LEVEL_ORDER);
     }
    OrgChart::Iterator OrgChart::end_preorder(){
+             if (_root == nullptr) {
+            throw "no root";
+        }
           return Iterator(&_orderedVec, END_LEVEL_ORDER);
    }
 
@@ -185,17 +203,25 @@ namespace ariel {
                 // cout << endl;
             }
             else if (type == REVERSE_ORDER){
-                for (i = node->children.size()-1 ; i >= 0 && i < 4000000000 ; i--){ // 4000000000 because we are using unsigned int
-                    _orderedVec.insert(_orderedVec.begin(),node->children.at(i));
-                }
-                for (i = node->children.size()-1 ; i >= 0 && i < 4000000000 ; i--){ // 4000000000 because we are using unsigned int
-                    fill_order(node->children.at(i), type);
-                }
 
-                // for (i = 0 ; i < _orderedVec.size() ; i ++){
-                //     cout << _orderedVec.at(i)->name << " ";
+                queue<Node*> q;
+                q.push(node);
+                while (!q.empty()) {
+                    Node *temp = q.front();
+                    q.pop();
+                    for (i = temp->children.size()-1 ; i >= 0 && i < 4000000000 ; i--) {
+                        q.push(temp->children.at(i));
+                    }
+                    _orderedVec.insert(_orderedVec.begin(), temp);
+                }
+                // for (i = node->children.size()-1 ; i >= 0 && i < 4000000000 ; i--){ // 4000000000 because we are using unsigned int
+                //     _orderedVec.insert(_orderedVec.begin(),node->children.at(i));
                 // }
-                // cout << endl;
+
+                // for (i = node->children.size()-1 ; i >= 0 && i < 4000000000 ; i--){ // 4000000000 because we are using unsigned int
+                //     fill_order(node->children.at(i), type);
+                // }
+
 
             }
             else if (type == PRE_ORDER){
