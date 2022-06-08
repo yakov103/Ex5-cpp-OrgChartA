@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed May 25 07:18:32 2022
+# Make data base, printed on Wed Jun  8 00:22:54 2022
 
 # Variables
 
@@ -43,7 +43,7 @@ GDMSESSION = ubuntu
 # environment
 XMODIFIERS = @im=ibus
 # makefile
-CURDIR := /home/yakovkhodorkovski/Desktop/testforcpp/Ex5-cpp-OrgChartA
+CURDIR := /home/yakovkhodorkovski/Desktop/Ex5-cpp-part1/Ex5-cpp-OrgChartA
 # makefile
 SHELL = /bin/sh
 # environment
@@ -53,7 +53,7 @@ VTE_VERSION = 6003
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:61611
+JOURNAL_STREAM = 8:61057
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # environment
@@ -75,15 +75,15 @@ CXXFLAGS = -std=$(CXXVERSION) -Werror -g -Wsign-conversion -I$(SOURCE_PATH)
 # environment
 XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=32aab59e98b255e7f37cd8ac628a666c
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=69d6bc480f766fdde31cc08362a04e07
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-MANAGERPID = 1559
+MANAGERPID = 1523
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
-VSCODE_CWD = /home/yakovkhodorkovski/Desktop/testforcpp/Ex5-cpp-OrgChartA
+VSCODE_CWD = /home/yakovkhodorkovski/Desktop/Ex5-cpp-part1/Ex5-cpp-OrgChartA
 # environment
 GSETTINGS_SCHEMA_DIR = /snap/code/97/usr/share/glib-2.0/schemas
 # default
@@ -93,7 +93,7 @@ PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/ubuntu:@/tmp/.ICE-unix/1773,unix/ubuntu:/tmp/.ICE-unix/1773
+SESSION_MANAGER = local/ubuntu:@/tmp/.ICE-unix/1734,unix/ubuntu:/tmp/.ICE-unix/1734
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -111,7 +111,7 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = b083cae3c8cd402690d1a55a4ca17ca2
+INVOCATION_ID = 557fa5e5fd0340fa927694656132dd16
 # environment
 GDK_PIXBUF_MODULEDIR = /snap/code/97/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
@@ -133,11 +133,11 @@ SNAP_INSTANCE_KEY =
 # makefile (from 'Makefile', line 4)
 CXXVERSION = c++2a
 # environment
-PWD = /home/yakovkhodorkovski/Desktop/testforcpp/Ex5-cpp-OrgChartA
+PWD = /home/yakovkhodorkovski/Desktop/Ex5-cpp-part1/Ex5-cpp-OrgChartA
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1738
+SSH_AGENT_PID = 1699
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -193,7 +193,7 @@ SHLVL = 1
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-0fb53294-6eb8-430a-92af-7bf490063b83.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-88aecc1f-b28b-4b0b-bdfc-92ec306efc8c.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -209,7 +209,7 @@ XDG_CURRENT_DESKTOP = Unity
 # default
 MAKE_COMMAND := make
 # environment
-OLDPWD = /home/yakovkhodorkovski/Desktop/testforcpp
+OLDPWD = /home/yakovkhodorkovski/Desktop/Ex5-cpp-part1
 # default
 .VARIABLES := 
 # automatic
@@ -247,11 +247,11 @@ DBUS_STARTER_BUS_TYPE = session
 # makefile (from 'Makefile', line 5)
 SOURCE_PATH = sources
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/2d9de9dd_fd3e_4691_be63_957cd7bf8e84
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/28e36535_2e88_4ab4_b547_43f937ee5f97
 # automatic
 ^F = $(notdir $^)
 # environment
-GNOME_TERMINAL_SERVICE = :1.1438
+GNOME_TERMINAL_SERVICE = :1.81
 # default
 SUFFIXES := 
 # environment
@@ -271,9 +271,9 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 37830
+VSCODE_PID = 2709
 # environment
-DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=32aab59e98b255e7f37cd8ac628a666c
+DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=69d6bc480f766fdde31cc08362a04e07
 # makefile (from 'Makefile', line 8)
 TIDY_FLAGS = -extra-arg=-std=$(CXXVERSION) -checks=bugprone-*,clang-analyzer-*,cppcoreguidelines-*,performance-*,portability-*,readability-*,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-cppcoreguidelines-owning-memory --warnings-as-errors=*
 # variable set hash-table stats:
@@ -286,8 +286,8 @@ TIDY_FLAGS = -extra-arg=-std=$(CXXVERSION) -checks=bugprone-*,clang-analyzer-*,c
 
 # Directories
 
-# . (device 2053, inode 1966548): 14 files, no impossibilities.
-# sources (device 2053, inode 1966611): 5 files, no impossibilities.
+# . (device 2053, inode 1967540): 14 files, no impossibilities.
+# sources (device 2053, inode 1967661): 5 files, no impossibilities.
 
 # 19 files, no impossibilities in 2 directories.
 
@@ -322,7 +322,7 @@ demo: Demo.o objects/OrgChart.o
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-25 07:18:06.339538739
+#  Last modified 2022-06-08 00:22:11.677022611
 #  File has been updated.
 #  Successfully updated.
 
@@ -407,6 +407,6 @@ valgrind: demo test
 # strcache performance: lookups = 55 / hit rate = 34%
 # hash-table stats:
 # Load=36/8192=0%, Rehash=0, Collisions=2/55=4%
-# Finished Make data base on Wed May 25 07:18:32 2022
+# Finished Make data base on Wed Jun  8 00:22:54 2022
 
  

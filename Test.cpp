@@ -44,6 +44,8 @@ TEST_CASE("Good case ")
        |                 |
        VP_SW             VP_BI
  */
+
+//with prefix
     token.clear(); 
   for (auto it = organization.begin_level_order(); it != organization.end_level_order(); ++it){token += *it + " " ;}
   
@@ -58,6 +60,25 @@ TEST_CASE("Good case ")
 
   // demonstrate the arrow operator:
   for (auto it = organization.begin_level_order(); it != organization.end_level_order(); ++it)
+  {
+    cout << it->size() << " " ;
+  } 
+
+  // postfix
+      token.clear(); 
+  for (auto it = organization.begin_level_order(); it != organization.end_level_order(); it++){token += *it + " " ;}
+  
+  CHECK (token == "CEO CTO CFO COO VP_SW VP_BI " );
+  token.clear();
+  for (auto it = organization.begin_reverse_order(); it != organization.reverse_order(); it++){token += *it + " " ;}
+    CHECK (token == "VP_SW VP_BI CTO CFO COO CEO " );
+    token.clear();
+  for (auto it=organization.begin_preorder(); it!=organization.end_preorder(); it++) {token += *it + " " ;}
+    CHECK (token == "CEO CTO VP_SW CFO COO VP_BI " );
+    token.clear();
+
+  // demonstrate the arrow operator:
+  for (auto it = organization.begin_level_order(); it != organization.end_level_order(); it++)
   {
     cout << it->size() << " " ;
   } 
@@ -80,5 +101,20 @@ TEST_CASE("Bad cases"){
     CHECK_NOTHROW(org.add_sub("grandchild", "greatgrandchild"));
     CHECK_THROWS(org.add_sub("whatt", "cannot"));// no such parent
     CHECK_THROWS(org.add_sub("bishbash", "child")); // no such parent
+
+    OrgChart org2 ; 
+    CHECK_THROWS(org2.begin()); // try to init iterator without root
+    CHECK_THROWS(org2.add_sub("root", "child")); // still no root
+    CHECK_THROWS(org2.add_sub("","")); // empty parent , empty child
+    CHECK_THROWS(org2.add_sub("\n","\n")); // empty parent , empty child
+    CHECK_THROWS(org2.add_sub("","noparente")); // empty parent 
+    CHECK_THROWS(org2.add_sub("nochilde","")); //  empty child
+    CHECK_THROWS(org2.add_root(""));// no name on root .
+    CHECK_NOTHROW(org2.add_root("root"));
+    CHECK_NOTHROW(org2.add_sub("", "child"));// no name after adding root 
+    CHECK_NOTHROW(org2.add_sub("root", "")); // no name after adding root
+    CHECK_NOTHROW(org2.add_sub("root", "\n")); // no name after adding root
+    CHECK_NOTHROW(org2.add_sub("root", "        ")); // no name after adding root
+    CHECK_NOTHROW(org2.add_sub("\n", "child"));// no name after adding root
 
 }

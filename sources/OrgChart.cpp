@@ -5,34 +5,77 @@ namespace ariel {
 
     /* OrgChart Implementation */
 
+
     /*
-    *constractor
+    * @brief constructor
+    * @param none
+    * @return none
     */
+
     OrgChart::OrgChart() {
         _root = nullptr;
 
     }
-    /*
-    * destructor
+
+    /* 
+    *
+    *@brief copy constructor
+    *@param const OrgChart& other
+    *@return OrgChart&
     */
 
+    OrgChart::OrgChart(const OrgChart& other) {
+    _root = nullptr; 
+     add_root(other._root->name); // deep copy 
+    Node * temp = nullptr; 
+    for (unsigned int j = 0 ; j < other._orderedVec.size() ; j++) {
+       temp = other._orderedVec.at(j);
+       for (unsigned int i = 0; i < temp->children.size(); i++) {
+           add_sub(temp->name, temp->children[i]->name);
+       }
+    }
+    }
+
+    /*
+    * @brief destructor
+    * @param none
+    * @return none
+    */
+   
+
     OrgChart::~OrgChart() {
-       
-    //    while (!_orderedVec.empty()) {
-    //         delete _orderedVec.back();
-    //         _orderedVec.pop_back();
-    //     }
-        
+
+       while (!_orderedVec.empty()) {
+            delete _orderedVec.back();
+            _orderedVec.pop_back();
+        }
 }
 
+    /*
+    * @brief assignment operator
+    * @param name
+    * @return none
+    */
 
 
-    OrgChart& OrgChart::operator= (const OrgChart& other) {
-        if (this != &other) {
-            delete _root;
-            _root = other._root;
-        }
-        return *this;
+    OrgChart& OrgChart::operator= (const OrgChart& other) { // assignment operator
+    if (this == &other) {
+        return *this; // if the same object, return the object
+    }
+    while (!_orderedVec.empty()) {
+        delete _orderedVec.back();
+        _orderedVec.pop_back();
+    }
+    add_root(other._root->name); // deep copy 
+    Node * temp  = nullptr; 
+    for (unsigned int j = 0 ; j < other._orderedVec.size() ; j++) {
+       temp = other._orderedVec.at(j);
+       for (unsigned int i = 0; i < temp->children.size(); i++) {
+           add_sub(temp->name, temp->children.at(i)->name);
+       }
+    }
+
+    return *this; 
     }
 
     /*
@@ -47,17 +90,27 @@ namespace ariel {
         _root = new Node;
         _root->name = name;
         _root->level = 0 ; 
+        _vecClean.push_back(_root);
+        this->begin();
         return *this;
     }
 
-    bool OrgChart::check_parent(string parent, string child, Node *node)
+    /*
+    * @brief check if the parent is in the tree
+    * 
+    * 
+    * @return none
+    */
+
+    bool OrgChart::check_parent(string &parent, string &child, Node *node)
     {
-        if (node->name.compare(parent) == 0)
+        if (node->name == parent)
         {
             Node *new_sub = new Node;
             new_sub->name = child;
             new_sub->level = node->level +1 ; 
             node->children.push_back(new_sub);
+            _vecClean.push_back(new_sub);
             return true;
         }
         for (unsigned int i = 0; i < node->children.size(); i++)
@@ -72,7 +125,12 @@ namespace ariel {
         return false;
     }
 
-
+    /*
+    * @brief add sub , if the parent is not null add the child to the parent
+    * @param parent
+    * @param child
+    * @return none
+    */
 
     OrgChart& OrgChart::add_sub(string parent, string child) {
         if (_root == nullptr) {
@@ -82,9 +140,15 @@ namespace ariel {
         {
             throw std::invalid_argument("parent not found");
         }
+         this->begin();
         return *this;
     }
 
+    /*
+    * @brief init the Iterator with level order by BFS 
+    * @param none
+    * @return Iterator
+    */
 
     OrgChart::Iterator OrgChart::begin_level_order()  {
         if (_root == nullptr) {
@@ -94,7 +158,7 @@ namespace ariel {
             delete _orderedVec.back(); 
         }
         _orderedVec.clear();
-        this->_orderedVec.push_back(_root);
+        //this->_orderedVec.push_back(_root);
         this->fill_order(_root,LEVEL_ORDER);
         Node *temp = new Node;
         temp->name= "ENDITERATOR";
@@ -125,6 +189,15 @@ namespace ariel {
         Iterator it = Iterator(&this->_orderedVec, REVERSE_ORDER);
         return it;
     }
+
+    /*
+    * @brief init the iterator in preorder which use DFS 
+    * @param none
+    * 
+    * @return Iterator
+    */
+
+
    OrgChart::Iterator OrgChart::begin_preorder()  {
         if (_root == nullptr) {
             throw "no root";
@@ -133,7 +206,7 @@ namespace ariel {
             delete _orderedVec.back(); 
         }
         _orderedVec.clear();
-        this->_orderedVec.push_back(_root);
+        //this->_orderedVec.push_back(_root);
         this->fill_order(_root,PRE_ORDER);
         Node *temp = new Node;
         temp->name= "ENDITERATOR";
@@ -141,18 +214,37 @@ namespace ariel {
         Iterator it = Iterator(&this->_orderedVec, PRE_ORDER);
         return it;
    }
+
+    /*
+    * @brief end itarator
+    *
+    * @return Iterator
+    */
+
     OrgChart::Iterator OrgChart::end_level_order() {
               if (_root == nullptr) {
             throw "no root";
         }
         return Iterator(&_orderedVec, END_LEVEL_ORDER);
     }
+
+        /*
+    * @brief end itarator
+    *
+    * @return Iterator
+    */
     OrgChart::Iterator OrgChart::reverse_order() {
               if (_root == nullptr) {
             throw "no root";
         }
         return Iterator(&_orderedVec, END_LEVEL_ORDER);
     }
+
+        /*
+    * @brief end itarator
+    *
+    * @return Iterator
+    */
    OrgChart::Iterator OrgChart::end_preorder(){
              if (_root == nullptr) {
             throw "no root";
@@ -160,6 +252,9 @@ namespace ariel {
           return Iterator(&_orderedVec, END_LEVEL_ORDER);
    }
 
+ /*
+ * @brief send to level order
+ */ 
     OrgChart::Iterator OrgChart::begin(){
         return begin_level_order();
     }
@@ -167,12 +262,17 @@ namespace ariel {
         return end_level_order();
     }
 
+    /*
+    * @brief os stram operator for printing the chart 
+    * @param os
+    * @param chart
+    * @return os
+    */
+
     ostream& operator<<(ostream& os,  OrgChart& org) {
         org.begin();
-        unsigned int  i ;
+        unsigned int  i = 0 ;
         unsigned int currLevel = 0 ; 
-        unsigned int total = org._orderedVec.size();
-
         for (i = 0 ; i < org._orderedVec.size()-1; i++){ 
             if (currLevel  == org._orderedVec.at(i)->level){
                 os << org._orderedVec.at(i)->name << " "; 
@@ -187,49 +287,53 @@ namespace ariel {
     }
 
 
-        // will fill the vector with order that wanted .
+        /*
+        *will fill the vector with order that wanted by type  .
+        * level order : using BFS . 
+        * reverse order : using BFS , but we adding the from the start .
+        * pre order : using DFS .
+        */
+
+
     void OrgChart::fill_order(Node *node, iterator_type type) {
             unsigned int i = 0; // index for loop
-            if (type == LEVEL_ORDER) {
-                for (i = 0; i < node->children.size(); i++) {
-                    _orderedVec.push_back(node->children.at(i));
+            if (type == LEVEL_ORDER) { // BFS
+                queue <Node *> q;
+                q.push(node);
+                while (!q.empty()) {
+                    Node *temp = q.front();
+                    q.pop();
+                    for (i = 0; i < temp->children.size(); i++) {
+                        q.push(temp->children.at(i));
+                    }
+                    _orderedVec.push_back(temp);
                 }
-                for (i = 0; i < node->children.size(); i++) {
-                    fill_order(node->children.at(i), type);
-                }
-                // for (i = 0 ; i < _orderedVec.size() ; i ++){
-                //     cout << _orderedVec.at(i)->name << " ";
-                // }
-                // cout << endl;
             }
-            else if (type == REVERSE_ORDER){
+            else if (type == REVERSE_ORDER){ // Reversed BFS 
 
                 queue<Node*> q;
                 q.push(node);
                 while (!q.empty()) {
                     Node *temp = q.front();
                     q.pop();
-                    for (i = temp->children.size()-1 ; i >= 0 && i < 4000000000 ; i--) {
+                    for (i = temp->children.size()-1 ; i >= 0 && i < VERY_LARGE_LONG ; i--) {
                         q.push(temp->children.at(i));
                     }
                     _orderedVec.insert(_orderedVec.begin(), temp);
                 }
-                // for (i = node->children.size()-1 ; i >= 0 && i < 4000000000 ; i--){ // 4000000000 because we are using unsigned int
-                //     _orderedVec.insert(_orderedVec.begin(),node->children.at(i));
-                // }
-
-                // for (i = node->children.size()-1 ; i >= 0 && i < 4000000000 ; i--){ // 4000000000 because we are using unsigned int
-                //     fill_order(node->children.at(i), type);
-                // }
-
+         
 
             }
-            else if (type == PRE_ORDER){
-                for (i = 0 ; i < node->children.size() ; i++){
-                    _orderedVec.push_back(node->children.at(i));
-                    if (node->children.at(i)->children.size() > 0){
-                        fill_order(node->children.at(i), type);
+            else if (type == PRE_ORDER){ // DFS 
+                stack<Node*> s;
+                s.push(node);
+                while (!s.empty()) {
+                    Node *temp = s.top();
+                    s.pop();
+                    for (i = temp->children.size()-1 ; i >= 0 && i < VERY_LARGE_LONG ; i--) {
+                        s.push(temp->children.at(i));
                     }
+                    _orderedVec.push_back(temp);
                 }
             }
         }
@@ -238,19 +342,41 @@ namespace ariel {
 
     /* implementation of the iterator */
 
+    /* 
+    *
+    * @brief constructor
+    * @param pointer to vector of nodes. 
+    * @param type of iterator.
+    * 
+    */
+
 
     OrgChart::Iterator::Iterator(vector<Node*> * nodes, iterator_type type) {
-        _index = 0;
-   
+        _index = 0;  
         _orderedVecIter = nodes;
-        // for (unsigned int i = 0 ; i < _orderedVecIter->size() ; i++){
-        //     cout << _orderedVecIter->at(i)->name << " ";
-        // }
         if (type == END_LEVEL_ORDER){
             _index = _orderedVecIter->size()-1;
         }
     }
 
+    /*
+    * @brief copy constructor
+    * @param iterator
+    * 
+    */  
+
+    OrgChart::Iterator::Iterator(const Iterator& other) {
+        _index = other._index;
+        _orderedVecIter = other._orderedVecIter;
+    }
+
+    /*
+    * @brief operator ++
+    * we just move the index forward . 
+    *   
+    *   
+    * @return Iterator
+    */
 
     OrgChart::Iterator OrgChart::Iterator::operator++() {
         this->_index++;
